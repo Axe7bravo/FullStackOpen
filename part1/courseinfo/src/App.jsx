@@ -1,3 +1,5 @@
+
+//Part component renders the object data to the screen
 const Part = (props) => {
   console.log("part props", props);
 
@@ -22,6 +24,7 @@ const Header = (props) => {
   )
 }
 
+//Content component takes in the data from the main App component to pass to Part component
 const Content = (props) => {
   console.log("Content props", props);
 
@@ -39,6 +42,7 @@ const Content = (props) => {
   );
 };
 
+//Total component sums the number of exercises
 const Total = (props) => {
   const totalExercises = props.parts.reduce((sum, part) => sum + part.exercises, 0);
   return (
@@ -48,6 +52,9 @@ const Total = (props) => {
   );
 };
 
+
+
+//Main App component that brings all the components together
 const App = () => {
   const course = {
     name: 'Half Stack application development',
