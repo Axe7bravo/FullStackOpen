@@ -18,6 +18,9 @@ const Statistics = (props) => {
   const average = total === 0 ? 0 : (props.good * 1 + props.neutral * 0 + props.bad * -1) / total;
   const positivePercentage = total === 0 ? 0 : (props.good / total) * 100;
 
+  let emoji = "";
+
+
   if(total === 0){
 
       return (
@@ -28,9 +31,15 @@ const Statistics = (props) => {
       )
   }
 
+  if (average < 0) {
+    emoji = "😞"; // when average is negative
+  } else if (average > 0) {
+    emoji = "😊"; // when average is positive
+  }
+
   return (
     <div>
-      <h1>statistics</h1>
+      <h1>statistics {emoji}</h1>
       <table>
         <tbody> 
           <StatisticLine text="good" value={props.good} />
