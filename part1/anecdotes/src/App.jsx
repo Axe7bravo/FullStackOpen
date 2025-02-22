@@ -30,6 +30,9 @@ const App = () => {
   }
 
   const getMostVotedAnecdote = () => {
+    if (votes.every(vote => vote === 0)) { // Check if all votes are zero
+      return "no votes yet"; // Return the message
+    }
     let maxVotes = 0
     let mostVotedIndex = 0
 
@@ -52,8 +55,14 @@ const App = () => {
       <Button onClick={handleNextAnecdote} text="next anecdote" />
 
       <h1>Anecdote with most votes</h1>
-      {anecdotes[getMostVotedAnecdote()]}
-      <p>has {votes[getMostVotedAnecdote()]} votes</p>
+      {typeof getMostVotedAnecdote() === 'number' ? ( 
+      <>
+        {anecdotes[getMostVotedAnecdote()]}
+        <p>has {votes[getMostVotedAnecdote()]} votes</p>
+      </>
+    ) : (
+      <p>{getMostVotedAnecdote()}</p> 
+    )}
     </div>
   )
 }
