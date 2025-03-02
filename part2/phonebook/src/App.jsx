@@ -43,6 +43,20 @@ const App = () => {
     })
   };
 
+  const removePerson = (id) => {
+    if (window.confirm("Do you really want to delete this person?")) {
+        numberService
+            .remove(id)
+            .then(() => {
+                setPersons(persons.filter((person) => person.id !== id));
+            })
+            .catch(error => {
+                alert(`the person '${persons.find(p => p.id === id).name}' was already deleted from server`, error)
+                setPersons(persons.filter(p => p.id !== id))
+            });
+    }
+};
+
   const handleNameChange = (event) => {
     
     setNewName(event.target.value);
@@ -80,7 +94,12 @@ const App = () => {
       <h3>Numbers</h3>
       <div>
           {searchPerson.map((person) => (
-                <Person key={person.id} name={person.name} number={person.number} />
+                <Person 
+                  key={person.id} 
+                  name={person.name} 
+                  number={person.number} 
+                  id={person.id} 
+                  removePerson={removePerson} />              
                 ))}
       </div>
         
