@@ -3,12 +3,15 @@ import Person from './components/person';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import numberService from './services/numbers';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const hook = () => {
     numberService
@@ -40,9 +43,21 @@ const App = () => {
                     );
                     setNewName('');
                     setNewNumber('');
+                    setErrorMessage(
+                      `${returnedPerson.name} information updated successfullly`
+                    )
+                    setTimeout(() => {
+                      setErrorMessage(null)
+                    }, 5000)
+
                 })
                 .catch(() => {
-                  alert("Error updating person information");
+                  setErrorMessage(
+                    `Note: '${existingPerson.name}' could not be updated in server`
+                  )
+                  setTimeout(() => {
+                    setErrorMessage(null)
+                  }, 5000)
                 });
         }
     } else {
@@ -57,10 +72,22 @@ const App = () => {
                 setPersons(persons.concat(returnedPerson));
                 setNewName('');
                 setNewNumber('');
+                setErrorMessage(
+                  `Added ${returnedPerson.name}`
+                )
+                setTimeout(() => {
+                  setErrorMessage(null)
+                }, 5000)
+
             })
-            .catch(() => {
-                alert("Error adding person information");
-            })
+            .catch((error) => {
+              setErrorMessage(
+                `Error Occured:'${error}'`
+              )
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000);
+            });
     }
 };
 
@@ -70,10 +97,21 @@ const App = () => {
             .remove(id)
             .then(() => {
                 setPersons(persons.filter((person) => person.id !== id));
+                setErrorMessage(
+                  `${persons.find(p => p.id === id).name} deleted`
+                )
+                setTimeout(() => {
+                  setErrorMessage(null)
+                }, 5000)
             })
-            .catch(() => {
-                alert(`the person '${persons.find(p => p.id === id).name}' was already deleted from server`)
-                setPersons(persons.filter(p => p.id !== id))
+            .catch((error) => {
+              setErrorMessage(
+                `Error Occured:'${error}'`
+              )
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+              setPersons(persons.filter(p => p.id !== id))
             });
     }
 };
@@ -102,6 +140,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
       <h3>Add a new</h3>
