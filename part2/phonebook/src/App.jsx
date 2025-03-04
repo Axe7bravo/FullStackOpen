@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false);
 
 
   const hook = () => {
@@ -43,6 +44,7 @@ const App = () => {
                     );
                     setNewName('');
                     setNewNumber('');
+                    setIsError(false);
                     setErrorMessage(
                       `${returnedPerson.name} information updated successfullly`
                     )
@@ -72,9 +74,11 @@ const App = () => {
                 setPersons(persons.concat(returnedPerson));
                 setNewName('');
                 setNewNumber('');
+                
                 setErrorMessage(
                   `Added ${returnedPerson.name}`
                 )
+                setIsError(false);
                 setTimeout(() => {
                   setErrorMessage(null)
                 }, 5000)
@@ -84,6 +88,7 @@ const App = () => {
               setErrorMessage(
                 `Error Occured:'${error}'`
               )
+              setIsError(true);
               setTimeout(() => {
                 setErrorMessage(null)
               }, 5000);
@@ -100,14 +105,16 @@ const App = () => {
                 setErrorMessage(
                   `${persons.find(p => p.id === id).name} deleted`
                 )
+                setIsError(false);
                 setTimeout(() => {
                   setErrorMessage(null)
                 }, 5000)
             })
-            .catch((error) => {
+            .catch(() => {
               setErrorMessage(
-                `Error Occured:'${error}'`
+                `Information of ${persons.find(p => p.id === id).name} already deleted from server`
               )
+              setIsError(true);
               setTimeout(() => {
                 setErrorMessage(null)
               }, 5000)
@@ -140,7 +147,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} isError={isError} />
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
       <h3>Add a new</h3>
