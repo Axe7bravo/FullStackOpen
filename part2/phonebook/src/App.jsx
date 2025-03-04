@@ -44,10 +44,10 @@ const App = () => {
                     );
                     setNewName('');
                     setNewNumber('');
-                    setIsError(false);
                     setErrorMessage(
                       `${returnedPerson.name} information updated successfullly`
                     )
+                    setIsError(false);
                     setTimeout(() => {
                       setErrorMessage(null)
                     }, 5000)
@@ -57,6 +57,7 @@ const App = () => {
                   setErrorMessage(
                     `Note: '${existingPerson.name}' could not be updated in server`
                   )
+                  setIsError(true);
                   setTimeout(() => {
                     setErrorMessage(null)
                   }, 5000)
