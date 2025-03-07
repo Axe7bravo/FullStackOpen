@@ -1,0 +1,71 @@
+
+
+.country-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .country-flag {
+    width: 200px;
+  }
+  
+  .weather-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .weather-icon {
+    width: 50px; /* Adjust as needed */
+    height: auto;
+  }
+  
+  .weather-info {
+    margin-left: 10px;
+  }
+
+  .country-container ul {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 10px 0;
+  }
+  
+  .country-container ul li {
+    margin: 5px 0; 
+    padding: 8px; 
+    border: 1px solid #eee; 
+    border-radius: 4px; 
+    background-color: #f0f0f0;
+  }
+
+  .search-container {
+    margin: 20px auto;
+    max-width: 400px;
+    font-family: Arial, sans-serif;
+
+  }
+  
+  .search-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .search-label {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .countries-list {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
