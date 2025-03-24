@@ -146,7 +146,7 @@ const App = () => {
 
 
   return (
-    <div>
+    <div className='container'>
       <h2>Phonebook</h2>
       <Notification message={errorMessage} isError={isError} />
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
@@ -160,7 +160,7 @@ const App = () => {
                 addPerson={addPerson}
             />
       <h3>Numbers</h3>
-      <div>
+      <div className='people'>
           {searchPerson.map((person) => (
                 <Person 
                   key={person.id} 
