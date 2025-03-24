@@ -87,7 +87,7 @@ const App = () => {
             })
             .catch((error) => {
               setErrorMessage(
-                `Error Occured:'${error.response.data.error}'`
+                `${error.response.data.error}`
               )
               setIsError(true);
               setTimeout(() => {
